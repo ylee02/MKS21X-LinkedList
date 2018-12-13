@@ -61,6 +61,7 @@ public class MyLinkedList {
     return true;
   }
   public String toString() {
-
+    Node current = start;
+    while (current != null)
   }
 }
