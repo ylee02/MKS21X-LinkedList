@@ -18,10 +18,10 @@ public class MyLinkedList {
       return data;
     }
     public Integer setData(Integer i) {
-
+      data = i;
     }
     public String toString(){
-
+      return "" + data;
     }
   }
 
