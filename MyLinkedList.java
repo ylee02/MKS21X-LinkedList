@@ -44,13 +44,15 @@ public class MyLinkedList {
     start = null;
     end = null;
   }
+
   public int size() {
     return size;
   }
+
   public boolean add(int value) {
     if (size = 0) {
       start = new Node(value);
-      end = start;
+      end = start;  private Node start,end;
     }
     else {
       add = new Node(value, null, end)
@@ -60,8 +62,44 @@ public class MyLinkedList {
     size += 1;
     return true;
   }
-  public String toString() {
+
+  public boolean contains(Integer value) {
     Node current = start;
-    while (current != null)
+    while (current != null) {
+      if (current.getData() == value) {
+        return true;
+      }
+      current = current.next();
+    }
+    return false;
+  }
+
+  public void add(int index, Integer value) {
+    if (index < 0) {
+      throw new NullPointerException("Invalid index");
+    }
+
+    Node current = start;
+    for (int i = 0; i < index; i++) {
+      current = current.next();
+    }
+    try {
+      Node n = new Node(value, current, current.prev());
+      current.prev().setNext(n);
+      current.setPrev(n);
+
+    }catch (NullPointerException e) {
+      print ("Invalid index");
+    }
+  }
+
+  public String toString() {
+    String str = "";
+    Node current = start;
+    while (current != null) {
+      str += current.getData();
+      current = current.next();
+    }
+    return str;
   }
 }
