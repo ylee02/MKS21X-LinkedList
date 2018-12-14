@@ -2,7 +2,7 @@ public class MyLinkedList {
   private class Node {
     private Integer data;
     private Node next, prev;
-    public MyNode(Integer n) {
+    public Node(Integer n) {
       if (data == null) {
         throw new NullPointerException();
       }
@@ -10,7 +10,7 @@ public class MyLinkedList {
       prev = null;
       next = null;
     }
-    public MyNode(Integer n, Node next1; Node prev1) {
+    public Node(Integer n, Node next1, Node prev1) {
       if (data == null) {
         throw new NullPointerException();
       }
@@ -56,12 +56,12 @@ public class MyLinkedList {
   }
 
   public boolean add(int value) {
-    if (size = 0) {
+    if (size == 0) {
       start = new Node(value);
-      end = start;  private Node start,end;
+      end = start;
     }
     else {
-      add = new Node(value, null, end)
+      Node add = new Node(value, null, end);
       end.setNext(add);
       end = add;
     }
@@ -70,6 +70,7 @@ public class MyLinkedList {
   }
 
   public Integer get(int index) {
+    Node current = start;
     for (int i = 0; i <= index; i++) {
       current = current.next();
     }
@@ -80,6 +81,7 @@ public class MyLinkedList {
   }
 
   public Integer set(int index, Integer value) {
+    Node current = start;
     for (int i = 0; i <= index; i++) {
       current = current.next();
     }
@@ -135,7 +137,7 @@ public class MyLinkedList {
   public boolean remove(Integer value) {
     Node current = start;
     while (current != null) {
-      if (current.getData == value) {
+      if (current.getData() == value) {
         Node n = current.next();
         Node p = current.prev();
         n.setPrev(p);
