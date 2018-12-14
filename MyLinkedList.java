@@ -3,7 +3,7 @@ public class MyLinkedList {
     private Integer data;
     private Node next, prev;
     public Node(Integer n) {
-      if (data == null) {
+      if (n == null) {
         throw new NullPointerException();
       }
       data = n;
@@ -11,7 +11,7 @@ public class MyLinkedList {
       next = null;
     }
     public Node(Integer n, Node next1, Node prev1) {
-      if (data == null) {
+      if (n == null) {
         throw new NullPointerException();
       }
       data = n;
@@ -151,12 +151,12 @@ public class MyLinkedList {
   }
 
   public String toString() {
-    String str = "";
+    String str = "[";
     Node current = start;
     while (current != null) {
-      str += current.getData();
+      str += current.getData() + ", ";
       current = current.next();
     }
-    return str;
+    return str + "]";
   }
 }
