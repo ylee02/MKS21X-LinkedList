@@ -3,11 +3,17 @@ public class MyLinkedList {
     private Integer data;
     private Node next, prev;
     public MyNode(Integer n) {
+      if (data == null) {
+        throw new NullPointerException();
+      }
       data = n;
       prev = null;
       next = null;
     }
     public MyNode(Integer n, Node next1; Node prev1) {
+      if (data == null) {
+        throw new NullPointerException();
+      }
       data = n;
       next = next1;
       prev = prev1;
@@ -63,6 +69,28 @@ public class MyLinkedList {
     return true;
   }
 
+  public Integer get(int index) {
+    for (int i = 0; i <= index; i++) {
+      current = current.next();
+    }
+    if (index < 0 || current.getData() == null) {
+      throw new NullPointerException("Invalid index");
+    }
+    return current.getData();
+  }
+
+  public Integer set(int index, Integer value) {
+    for (int i = 0; i <= index; i++) {
+      current = current.next();
+    }
+    if (index < 0 || current.getData() == null) {
+      throw new NullPointerException("Invalid index");
+    }
+    Integer temp = current.getData();
+    current.setData(value);
+    return temp;
+  }
+
   public boolean contains(Integer value) {
     Node current = start;
     while (current != null) {
@@ -75,22 +103,49 @@ public class MyLinkedList {
   }
 
   public void add(int index, Integer value) {
-    if (index < 0) {
-      throw new NullPointerException("Invalid index");
-    }
-
     Node current = start;
     for (int i = 0; i < index; i++) {
       current = current.next();
     }
-    try {
+    if (index < 0 || current.getData() == null) {
+      throw new NullPointerException("Invalid index");
+    }
       Node n = new Node(value, current, current.prev());
       current.prev().setNext(n);
       current.setPrev(n);
+      size += 1;
+  }
 
-    }catch (NullPointerException e) {
-      print ("Invalid index");
+  public Integer remove(int index) {
+    Node current = start;
+    for (int i = 0; i <= index; i++) {
+      current = current.next();
     }
+    if (index < 0 || current.getData() == null) {
+      throw new NullPointerException("Invalid index");
+    }
+    Node n = current.next();
+    Node p = current.prev();
+    n.setPrev(p);
+    p.setNext(n);
+    size -= 1;
+    return current.getData();
+  }
+
+  public boolean remove(Integer value) {
+    Node current = start;
+    while (current != null) {
+      if (current.getData == value) {
+        Node n = current.next();
+        Node p = current.prev();
+        n.setPrev(p);
+        p.setNext(n);
+        size -= 1;
+        return true;
+      }
+      current = current.next();
+    }
+    return false;
   }
 
   public String toString() {
