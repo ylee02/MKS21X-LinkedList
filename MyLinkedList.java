@@ -1,8 +1,8 @@
-public class MyLinkedList {
+public class MyLinkedList<E> {
   private class Node {
-    private Integer data;
+    private E data;
     private Node next, prev;
-    public Node(Integer n) {
+    public Node(E n) {
       if (n == null) {
         throw new NullPointerException();
       }
@@ -10,7 +10,7 @@ public class MyLinkedList {
       prev = null;
       next = null;
     }
-    public Node(Integer n, Node next1, Node prev1) {
+    public Node(E n, Node next1, Node prev1) {
       if (n == null) {
         throw new NullPointerException();
       }
@@ -30,11 +30,11 @@ public class MyLinkedList {
     public void setPrev(Node other) {
       prev = other;
     }
-    public Integer getData() {
+    public E getData() {
       return data;
     }
-    public Integer setData(Integer i) {
-      Integer temp = data;
+    public E setData(E i) {
+      E temp = data;
       data = i;
       return data;
     }
@@ -69,7 +69,7 @@ public class MyLinkedList {
     return true;
   }
 
-  public Integer get(int index) {
+  public E get(int index) {
     Node current = start;
     for (int i = 0; i <= index; i++) {
       current = current.next();
@@ -80,7 +80,7 @@ public class MyLinkedList {
     return current.getData();
   }
 
-  public Integer set(int index, Integer value) {
+  public E set(int index, E value) {
     Node current = start;
     for (int i = 0; i <= index; i++) {
       current = current.next();
@@ -88,12 +88,12 @@ public class MyLinkedList {
     if (index < 0 || current.getData() == null) {
       throw new NullPointerException("Invalid index");
     }
-    Integer temp = current.getData();
+    E temp = current.getData();
     current.setData(value);
     return temp;
   }
 
-  public boolean contains(Integer value) {
+  public boolean contains(E value) {
     Node current = start;
     while (current != null) {
       if (current.getData() == value) {
@@ -104,7 +104,7 @@ public class MyLinkedList {
     return false;
   }
 
-  public void add(int index, Integer value) {
+  public void add(int index, E value) {
     Node current = start;
     for (int i = 0; i < index; i++) {
       current = current.next();
@@ -118,7 +118,7 @@ public class MyLinkedList {
       size += 1;
   }
 
-  public Integer remove(int index) {
+  public E remove(int index) {
     Node current = start;
     for (int i = 0; i <= index; i++) {
       current = current.next();
@@ -134,7 +134,7 @@ public class MyLinkedList {
     return current.getData();
   }
 
-  public boolean remove(Integer value) {
+  public boolean remove(E value) {
     Node current = start;
     while (current != null) {
       if (current.getData() == value) {
@@ -158,5 +158,25 @@ public class MyLinkedList {
       current = current.next();
     }
     return str + "]";
+  }
+
+  public void clear() {
+    start = null;
+    end = null;
+    size = 0;
+  }
+
+
+  public MyLinkedList conjoin(MyLinkedList data) {
+    if (this.size() == 0) {
+      start = data.start;
+      end = data.end;
+      size = data.size();
+    } if (data.start != null) {
+      end.setNext(data.start);
+      data.start.setPrev(end);
+      end = data.end;
+      size = size() + data.size();
+    }
   }
 }
